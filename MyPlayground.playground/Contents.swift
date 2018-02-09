@@ -4,13 +4,12 @@ import UIKit
 
 var str = "Hello, playground"
 
-
-
 class Student{
     var age:Int
     var name:String
     var studentNumber:Int
     var counter:Int
+    var studyType:StudyType
     
     init()
     {
@@ -26,6 +25,20 @@ class Student{
             counter = x
         }
     }
+}
+
+class StudentGroup()
+{
+    var students:Student
+    var grou
+}
+
+enum StudyType
+{
+    case Software
+    case Media
+    case Technologie
+    case Bussiness
 }
 
 var myStudent = Student()
