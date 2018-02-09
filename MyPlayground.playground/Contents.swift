@@ -27,10 +27,21 @@ class Student{
     }
 }
 
-class StudentGroup()
+class StudentGrou
 {
-    var students:Student
-    var grou
+    var students:[Student]
+    var groupName:String
+    
+    init(){
+        students = []
+        groupName = "default name"
+    }
+    
+    func getAmountOfStudents()->Int{
+        return students.count
+    }
+    
+    
 }
 
 enum StudyType
