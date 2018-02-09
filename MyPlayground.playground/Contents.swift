@@ -8,60 +8,89 @@ class Student{
     var age:Int
     var name:String
     var studentNumber:Int
-    var counter:Int
     var studyType:StudyType
     
-    init()
+    init(age:Int,name:String,studentNumber:Int,studyType:StudyType)
     {
-        age = 0
-        name = "defaultname"
-        studentNumber = 0
-        counter = 0
-    }
-    
-    func printNumbers(number:Int)
-    {
-        for x in 0...number{
-            counter = x
-        }
+        self.age = age
+        self.name = name
+        self.studentNumber = studentNumber
+        self.studyType = studyType
     }
 }
 
-class StudentGrou
+class StudentGroup
 {
     var students:[Student]
     var groupName:String
     
-    init(){
+    init(groupName:String){
         students = []
-        groupName = "default name"
+        self.groupName = groupName
     }
     
     func getAmountOfStudents()->Int{
+        //get the number of students in the list
         return students.count
     }
     
+    func addStudent(studentToAdd:Student)
+    {
+        students.append(studentToAdd)
+    }
     
+    func removeStudent(studentToRemove:Student)
+    {
+        //removes student from list and then updates the list
+        students = students.filter(){$0 !== studentToRemove}
+    }
+    
+    func getStudentsFromFunction(type:StudyType)->[Student]
+    {
+        var studentTempList:[Student] = []
+        
+        //loop through the list of students and create a new list that contains all students with a specific studytype
+        for student in students {
+            if(student.studyType == type)
+            {
+                studentTempList.append(student)
+            }
+        }
+        
+        return studentTempList
+    }
 }
 
 enum StudyType
 {
+    case Nothing
     case Software
     case Media
     case Technologie
     case Bussiness
 }
 
-var myStudent = Student()
+//---------------------------start of program---------------------------//
+var student1 = Student(age: 20, name: "Luc", studentNumber: 100001, studyType: StudyType.Bussiness)
+var student2 = Student(age: 20, name: "Harry", studentNumber: 100001, studyType: StudyType.Media)
+var student3 = Student(age: 20, name: "Willem", studentNumber: 100001, studyType: StudyType.Software)
+var student4 = Student(age: 20, name: "Henk", studentNumber: 100001, studyType: StudyType.Technologie)
+var student5 = Student(age: 20, name: "Kees", studentNumber: 100001, studyType: StudyType.Bussiness)
+var student6 = Student(age: 20, name: "Piet", studentNumber: 100001, studyType: StudyType.Media)
+var student7 = Student(age: 20, name: "Henk", studentNumber: 100001, studyType: StudyType.Technologie)
+var student8 = Student(age: 20, name: "Gast", studentNumber: 100001, studyType: StudyType.Software)
 
-var array = [myStudent]
+var studentGroup = StudentGroup(groupName: "group of students")
 
-myStudent.printNumbers(number:5)
-var i = myStudent.counter
+studentGroup.addStudent(studentToAdd: student1)
+studentGroup.addStudent(studentToAdd: student2)
+studentGroup.addStudent(studentToAdd: student3)
+studentGroup.addStudent(studentToAdd: student4)
+studentGroup.addStudent(studentToAdd: student5)
+studentGroup.addStudent(studentToAdd: student6)
+studentGroup.addStudent(studentToAdd: student7)
+studentGroup.addStudent(studentToAdd: student8)
 
-var myStudent2 = Student()
-myStudent2.counter = 0
+var studentsWithSoftware:[Student] = studentGroup.getStudentsFromFunction(type: StudyType.Software)
 
-array.append(myStudent2)
-
-array.remove(at: array.count - 1)
+studentGroup.removeStudent(studentToRemove: student1)
